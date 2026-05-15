@@ -16,9 +16,8 @@ declare_id!("3DLfmLuhAPRVbVFKTake4t2Z47M2bUGsM9oPaH9oDc8w");
 pub mod amm_anchor {
     use super::*;
 
-    pub fn initialize(ctx: Context<Initialize>) -> Result<()> {
-        msg!("Greetings from: {:?}", ctx.program_id);
-        Ok(())
+    pub fn initialize_pool(ctx: Context<InitializePool>, fee_bps: u16) -> Result<()> {
+        instructions::initialize_pool::handler(ctx, fee_bps)
     }
 }
 

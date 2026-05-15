@@ -55,3 +55,24 @@ pub struct InitializePool<'info> {
     pub system_program: Program<'info, System>,
     pub rent: Sysvar<'info, Rent>,
 }
+
+pub fn handler(ctx: Context<InitializePool>, fee_bps: u16) -> Result<()> {
+    require!(fee_bps <= MAX_FEE_BPS, AmmError::FeeToHigh);
+    require_keys_neq!(
+        ctx.accounts.mint_x.key(),
+        ctx.accounts.mint_y.key(),
+        AmmError::SameMint
+    );
+
+    let pool = &mut ctx.accounts.pool;
+    pool.mint_x = ctx.accounts.mint_x.key();
+    pool.mint_y = ctx.accounts.mint_y.key();
+    pool.vault_x = ctx.accounts.vault_x.key();
+    pool.vault_y = ctx.accounts.vault_y.key();
+    pool.lp_mint = ctx.accounts.lp_mint.key();
+    pool.fee_bps = fee_bps;
+    pool.bump = ctx.bumps.pool;
+    pool.lp_bump = ctx.bumps.lp_mint;
+
+    Ok(())
+}
