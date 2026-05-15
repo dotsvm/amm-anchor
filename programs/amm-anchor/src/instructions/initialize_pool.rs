@@ -57,7 +57,7 @@ pub struct InitializePool<'info> {
 }
 
 pub fn handler(ctx: Context<InitializePool>, fee_bps: u16) -> Result<()> {
-    require!(fee_bps <= MAX_FEE_BPS, AmmError::FeeToHigh);
+    require!(fee_bps <= MAX_FEE_BPS, AmmError::FeeTooHigh);
     require_keys_neq!(
         ctx.accounts.mint_x.key(),
         ctx.accounts.mint_y.key(),

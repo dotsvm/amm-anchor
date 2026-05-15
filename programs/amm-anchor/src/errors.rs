@@ -2,14 +2,14 @@ use anchor_lang::prelude::*;
 
 #[error_code]
 pub enum AmmError {
-    #[msg("Mint must be passed in canonical (sorted) order")]
+    #[msg("Mints must be passed in canonical (sorted) order")]
     MintsNotSorted,
 
-    #[msg("Mint must be different")]
+    #[msg("Mints must be different")]
     SameMint,
 
     #[msg("Fee exceeds maximum")]
-    FeeToHigh,
+    FeeTooHigh,
 
     #[msg("Math overflow")]
     MathOverflow,

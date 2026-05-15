@@ -20,6 +20,3 @@ pub mod amm_anchor {
         instructions::initialize_pool::handler(ctx, fee_bps)
     }
 }
-
-#[derive(Accounts)]
-pub struct Initialize {}
